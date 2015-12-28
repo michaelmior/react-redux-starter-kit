@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { actions as erdActions } from '../redux/modules/erd'
+import { actions as modelActions } from '../redux/modules/model'
 import Toolbar from '../components/Toolbar'
 
 const mapStateToProps = (state) => ({
-  entities: state.erd.entities
+  entities: state.model.entities
 })
 export class DiagramView extends React.Component {
   render () {
@@ -16,4 +16,4 @@ export class DiagramView extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, erdActions)(DiagramView)
+export default connect(mapStateToProps, modelActions)(DiagramView)
