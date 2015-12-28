@@ -1,3 +1,4 @@
+import Immutable from 'immutable'
 import { createAction, handleActions } from 'redux-actions'
 
 // ------------------------------------
@@ -17,14 +18,20 @@ export const actions = {
   deleteEntity
 }
 
+const emptyEntity = Immutable.Map({ fields: [] })
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
 export default handleActions({
   [ERD_ADD_ENTITY]: (state, { payload }) => {
-    return { entities: Array.of(payload, ...state.entities) }
+    return Object.assign({}, state, {
+      entities: state.entities.set(payload, emptyEntity)
+    })
   },
   [ERD_DELETE_ENTITY]: (state, { payload }) => {
-    return { entities: state.entities.filter(name => name !== payload) }
+    return Object.assign({}, state, {
+      entities: state.entities.delete(payload)
+    })
   }
-}, {entities: []})
+}, { entities: Immutable.Map() })
