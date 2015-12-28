@@ -77,7 +77,6 @@ describe('(View) Diagram', function () {
     })
 
     it('should dispatch an action when clicked.', function () {
-      debugger
       _spies.dispatch.should.have.not.been.called
       TestUtils.Simulate.click(_btn)
       _spies.dispatch.should.have.been.called
