@@ -22,7 +22,7 @@ const webpackConfig = {
   target: 'web',
   entry: {
     app: [
-      paths.base(config.dir_client) + '/app.js'
+      paths.base(config.dir_client) + '/main.js'
     ],
     vendor: config.compiler_vendor
   },
@@ -38,13 +38,14 @@ const webpackConfig = {
     new HtmlWebpackPlugin({
       template: paths.client('index.html'),
       hash: false,
-      favicon: paths.client('assets/favicon.ico'),
+      favicon: paths.client('static/favicon.ico'),
       filename: 'index.html',
       inject: 'body',
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new webpack.ProvidePlugin(config.compiler_globals)
   ],
   resolve: {
     root: paths.base(config.dir_client),
@@ -63,23 +64,13 @@ const webpackConfig = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel',
+
+        // NOTE: live development transforms (HMR, redbox-react) are
+        // configured in ~/build/webpack-environments/development.js
         query: {
           cacheDirectory: true,
-          plugins: ['transform-runtime', 'add-module-exports'],
-          presets: ['es2015', 'react', 'stage-0'],
-          env: {
-            development: {
-              plugins: [
-                ['react-transform', {
-                  // omit HMR plugin by default and _only_ load in hot mode
-                  transforms: [{
-                    transform: 'react-transform-catch-errors',
-                    imports: ['react', 'redbox-react']
-                  }]
-                }]
-              ]
-            }
-          }
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'react', 'stage-0']
         }
       },
       {
@@ -124,6 +115,7 @@ const webpackConfig = {
         remove: true,
         browsers: ['last 2 versions']
       },
+      safe: true,
       discardComments: {
         removeAll: true
       }
