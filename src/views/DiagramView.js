@@ -9,7 +9,9 @@ const mapStateToProps = (state) => ({
 export class DiagramView extends React.Component {
   render () {
     return (
-      <Toolbar {...this.props}/>
+      <div className='container text-center'>
+        <Toolbar {...this.props}/>
+      </div>
     )
   }
 }
