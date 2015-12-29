@@ -18,7 +18,7 @@ export const actions = {
   deleteEntity
 }
 
-const emptyEntity = Immutable.Map({ fields: [] })
+const emptyEntity = Immutable.Map({ name: '', fields: [] })
 
 // ------------------------------------
 // Reducer
@@ -26,7 +26,7 @@ const emptyEntity = Immutable.Map({ fields: [] })
 export default handleActions({
   [ERD_ADD_ENTITY]: (state, { payload }) => {
     return Object.assign({}, state, {
-      entities: state.entities.set(payload, emptyEntity)
+      entities: state.entities.set(payload, emptyEntity.set('name', payload))
     })
   },
   [ERD_DELETE_ENTITY]: (state, { payload }) => {
