@@ -1,0 +1,15 @@
+.node {
+  float: left;
+  padding: 10px;
+  display: inline-block;
+  border-width: 1px;
+}
+
+.node--selected {
+  background-color: #EEE;
+}
+
+.node--entity {
+  border-radius: 5px;
+  border-style: solid;
+}
