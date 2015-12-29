@@ -5,11 +5,11 @@ import Node from '../components/Node'
 import Toolbar from '../components/Toolbar'
 
 const mapStateToProps = (state) => ({
-  entities: state.model.entities
+  model: state.model
 })
 export class DiagramView extends React.Component {
   static propTypes = {
-    entities: React.PropTypes.object.isRequired
+    model: React.PropTypes.object.isRequired
   }
 
   render () {
@@ -17,7 +17,7 @@ export class DiagramView extends React.Component {
       <div className='container text-center'>
         <Toolbar {...this.props}/>
         <div className='entity-graph'>
-          {this.props.entities.map((entity, name) =>
+          {this.props.model.map((entity, name) =>
             <Node key='entity:{name}' label={name}/>
           )}
         </div>

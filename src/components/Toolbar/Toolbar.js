@@ -3,7 +3,7 @@ import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap'
 
 class Toolbar extends Component {
   static propTypes = {
-    entities: React.PropTypes.object.isRequired,
+    model: React.PropTypes.object.isRequired,
     addEntity: React.PropTypes.func.isRequired,
     deleteEntity: React.PropTypes.func.isRequired
   }
