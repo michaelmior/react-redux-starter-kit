@@ -13,11 +13,16 @@ export class DiagramView extends React.Component {
   static propTypes = {
     selectedEntity: React.PropTypes.string,
     selectEntity: React.PropTypes.func.isRequired,
+    deselectEntity: React.PropTypes.func.isRequired,
     model: React.PropTypes.object.isRequired
   }
 
   handleSelect (name) {
-    this.props.selectEntity(name)
+    if (this.props.selectedEntity === name) {
+      this.props.deselectEntity()
+    } else {
+      this.props.selectEntity(name)
+    }
   }
 
   render () {
