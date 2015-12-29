@@ -19,7 +19,7 @@ export class DiagramView extends React.Component {
         <div className='entity-graph'>
           {this.props.model.map((entity, name) =>
             <Node key='entity:{name}' label={name}/>
-          )}
+          ).toIndexedSeq()}
         </div>
       </div>
     )
