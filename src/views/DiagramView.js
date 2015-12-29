@@ -1,15 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { actions as modelActions } from '../redux/modules/model'
+import { actions as selectedEntityActions } from '../redux/modules/selectedEntity'
 import Node from '../components/Node'
 import Toolbar from '../components/Toolbar'
 
 const mapStateToProps = (state) => ({
+  selectedEntity: state.selectedEntity,
   model: state.model
 })
 export class DiagramView extends React.Component {
   static propTypes = {
+    selectedEntity: React.PropTypes.string,
+    selectEntity: React.PropTypes.func.isRequired,
     model: React.PropTypes.object.isRequired
+  }
+
+  handleSelect (name) {
+    this.props.selectEntity(name)
   }
 
   render () {
@@ -18,7 +26,10 @@ export class DiagramView extends React.Component {
         <Toolbar {...this.props}/>
         <div className='entity-graph'>
           {this.props.model.map((entity, name) =>
-            <Node key='entity:{name}' label={name}/>
+            <Node key={'entity:' + name}
+                  label={name}
+                  selected={this.props.selectedEntity === name}
+                  onClick={this.handleSelect.bind(this, name)}/>
           ).toIndexedSeq()}
         </div>
       </div>
@@ -26,4 +37,5 @@ export class DiagramView extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, modelActions)(DiagramView)
+const actions = Object.assign({}, modelActions, selectedEntityActions)
+export default connect(mapStateToProps, actions)(DiagramView)
