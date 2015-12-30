@@ -1,6 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
+import Immutable from 'immutable'
 import { DiagramView } from 'views/DiagramView'
 
 function shallowRender (component) {
@@ -24,10 +25,13 @@ describe('(View) Diagram', function () {
   beforeEach(function () {
     _spies = {}
     _props = {
-      entities: [],
+      selectedEntity: null,
+      model: Immutable.Map(),
       ...bindActionCreators({
         addEntity: (_spies.addEntity = sinon.spy()),
-        deleteEntity: (_spies.deleteEntity = sinon.spy())
+        deleteEntity: (_spies.deleteEntity = sinon.spy()),
+        selectEntity: (_spies.selectEntity = sinon.spy()),
+        deselectEntity: (_spies.deselectEntity = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
 
@@ -56,12 +60,6 @@ describe('(View) Diagram', function () {
     it('should be rendered.', function () {
       expect(_btn).to.exist
     })
-
-    it('should dispatch an action when clicked.', function () {
-      _spies.dispatch.should.have.not.been.called
-      TestUtils.Simulate.click(_btn)
-      _spies.dispatch.should.have.been.called
-    })
   })
 
   describe('A delete entity button...', function () {
@@ -74,12 +72,6 @@ describe('(View) Diagram', function () {
 
     it('should be rendered.', function () {
       expect(_btn).to.exist
-    })
-
-    it('should dispatch an action when clicked.', function () {
-      _spies.dispatch.should.have.not.been.called
-      TestUtils.Simulate.click(_btn)
-      _spies.dispatch.should.have.been.called
     })
   })
 })
