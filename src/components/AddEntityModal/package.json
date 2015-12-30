@@ -1,0 +1,6 @@
+{
+  "name": "AddEntityModal",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./AddEntityModal.js"
+}

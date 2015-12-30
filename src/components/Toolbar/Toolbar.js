@@ -1,38 +1,13 @@
 import React, { Component } from 'react'
-import { Button, ButtonGroup, ButtonInput, ButtonToolbar, Input, Modal } from 'react-bootstrap'
+import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap'
+import AddEntityModal from '../AddEntityModal'
 
 class Toolbar extends Component {
   static propTypes = {
-    model: React.PropTypes.object.isRequired,
     addEntity: React.PropTypes.func.isRequired,
     deleteEntity: React.PropTypes.func.isRequired,
-    deselectEntity: React.PropTypes.func.isRequired,
-    selectedEntity: React.PropTypes.string
-  }
-  state = {
-    showAddModal: false,
-    addDisabled: true
-  }
-
-  showAddModal () {
-    this.setState({showAddModal: true})
-  }
-
-  hideAddModal () {
-    this.setState({showAddModal: false})
-  }
-
-  newEntityNameChanged () {
-    let name = this.refs.newEntityName.getValue()
-    this.setState({addDisabled: name.length === 0})
-  }
-
-  addEntity (event) {
-    event.preventDefault()
-
-    let name = this.refs.newEntityName.getValue()
-    this.props.addEntity(name)
-    this.setState({showAddModal: false})
+    selectedEntity: React.PropTypes.string,
+    deselectEntity: React.PropTypes.func.isRequired
   }
 
   deleteEntity () {
@@ -46,7 +21,7 @@ class Toolbar extends Component {
         <ButtonToolbar>
           <ButtonGroup>
             <Button
-              onClick={this.showAddModal.bind(this)}>Add entity</Button>
+              onClick={(e) => this.refs.addModal.showAddModal(e)}>Add entity</Button>
             <Button
               disabled={!this.props.selectedEntity}
               onClick={this.deleteEntity.bind(this)}>
@@ -55,27 +30,7 @@ class Toolbar extends Component {
           </ButtonGroup>
         </ButtonToolbar>
 
-        <Modal show={this.state.showAddModal} onHide={this.hideAddModal.bind(this)}>
-          <form onSubmit={this.addEntity.bind(this)}>
-            <Modal.Header closeButton>
-              <Modal.Title>New entity</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Input
-                ref='newEntityName'
-                type='text'
-                label='Entity name'
-                placeholder='Enter a name for the new entity'
-                onChange={this.newEntityNameChanged.bind(this)} />
-            </Modal.Body>
-            <Modal.Footer>
-              <ButtonInput
-                type='submit'
-                bsStyle='primary'
-                disabled={this.state.addDisabled}>Add</ButtonInput>
-            </Modal.Footer>
-          </form>
-        </Modal>
+        <AddEntityModal ref='addModal' addEntity={this.props.addEntity}/>
       </div>
     )
   }
