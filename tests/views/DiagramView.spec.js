@@ -26,12 +26,15 @@ describe('(View) Diagram', function () {
     _spies = {}
     _props = {
       selectedEntity: null,
+      selectedField: null,
       model: Immutable.Map(),
       ...bindActionCreators({
         addEntity: (_spies.addEntity = sinon.spy()),
         deleteEntity: (_spies.deleteEntity = sinon.spy()),
         selectEntity: (_spies.selectEntity = sinon.spy()),
-        deselectEntity: (_spies.deselectEntity = sinon.spy())
+        deselectEntity: (_spies.deselectEntity = sinon.spy()),
+        selectField: (_spies.selectField = sinon.spy()),
+        deselectField: (_spies.deselectField = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
 

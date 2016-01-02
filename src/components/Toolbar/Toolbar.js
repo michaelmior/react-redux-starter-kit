@@ -9,7 +9,9 @@ class Toolbar extends Component {
     deleteEntity: React.PropTypes.func.isRequired,
     addField: React.PropTypes.func.isRequired,
     selectedEntity: React.PropTypes.string,
-    deselectEntity: React.PropTypes.func.isRequired
+    selectedField: React.PropTypes.string,
+    deselectEntity: React.PropTypes.func.isRequired,
+    deselectField: React.PropTypes.func.isRequired
   }
 
   deleteEntity () {

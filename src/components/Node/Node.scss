@@ -3,6 +3,7 @@
   padding: 10px;
   display: inline-block;
   border-width: 1px;
+  border-style: solid;
 }
 
 .node--selected {
@@ -11,5 +12,8 @@
 
 .node--entity {
   border-radius: 5px;
-  border-style: solid;
+}
+
+.node--field {
+  border-radius: 20px;
 }
