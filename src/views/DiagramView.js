@@ -14,6 +14,7 @@ export class DiagramView extends React.Component {
     selectedEntity: React.PropTypes.string,
     selectEntity: React.PropTypes.func.isRequired,
     deselectEntity: React.PropTypes.func.isRequired,
+    addField: React.PropTypes.func.isRequired,
     model: React.PropTypes.object.isRequired
   }
 
